@@ -1,0 +1,47 @@
+#include <stdio.h>
+void nhap_y(int n, int y[]) {
+    for (int i = 0; i <= n; i++) {
+        scanf("%d", &y[i]);
+    }
+}
+void nhap_D(int n, int D[], int y[]) {
+    for (int i = 0; i < n; i++) {
+        D[i] = y[i + 1] - y[i];
+    }
+}
+float tinh(int n, int D[], int y[], float k, float t, float b) {
+    for (int j = 2; j <= n; j++) {
+        for (int i = 0; i <= n - j; i++) {
+            D[i] = D[i + 1] - D[i];
+        }
+        k = k * (t - (j - 1)) / j;
+        b = b + k * D[0];
+    }
+    return b;
+}
+
+int main() {
+    int x0, h, y[100], D[100], n;
+    float t, k, x, b;
+    printf("Nh?p x0, x, h và n: ");
+    scanf("%d %f %d %d", &x0, &x, &h, &n);
+    t = (float)(x - x0) / h;
+    k = t;
+    printf("Nh?p các giá tr? y: ");
+    nhap_y(n, y);
+    nhap_D(n, D, y);
+    b = y[0] + t * D[0];
+    printf("Giá tr? n?i suy: %f\n", tinh(n, D, y, k, t, b));
+
+    return 0;
+}
+Nhập x0, x, h vα n: -1
+2.5
+1
+4
+Nhập cßc giá trị y: 2
+4
+-6
+7
+-5
+Gía trị nội suy: 10.367188
