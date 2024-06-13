@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include<stdio.h>
+
 void nhap_y(int n, int y[]) {
     for (int i = 0; i <= n; i++) {
         scanf("%d", &y[i]);
@@ -14,28 +15,26 @@ float tinh(int n, int D[], int y[], float k, float t, float b) {
         for (int i = 0; i <= n - j; i++) {
             D[i] = D[i + 1] - D[i];
         }
-        k = k * (t - (j - 1)) / j;
-        b = b + k * D[0];
+
+        k = k * (t + j - 1) / j;
+        b = b + k * D[n-1];
     }
-    return b;
+    return b; 
 }
 
 int main() {
     int x0, h, y[100], D[100], n;
-    float t, k, x, b;
-    printf("Nh?p x0, x, h và n: ");
-    scanf("%d %f %d %d", &x0, &x, &h, &n);
-    t = (float)(x - x0) / h;
+    float t, k,x, b;
+    scanf("%d %f %d %d", &x0,&x, &h, &n); 
+    t = (float)(x -x0) / h;
     k = t;
-    printf("Nh?p các giá tr? y: ");
     nhap_y(n, y);
     nhap_D(n, D, y);
-    b = y[0] + t * D[0];
-    printf("Giá tr? n?i suy: %f\n", tinh(n, D, y, k, t, b));
-
+    b = y[0] + t * D[n-1];
+    printf("%f", tinh(n, D, y, k, t, b));
     return 0;
 }
-Nhập x0, x, h vα n: -1
+Nhập x0, x, h vα n: 3
 2.5
 1
 4
