@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+float lagrange(float x, float x_values[], float y_values[], int n) {
+    float result = 0.0;
+    for (int i = 0; i < n; i++) {
+        float term = y_values[i];
+        for (int j = 0; j < n; j++) {
+            if (i != j) {
+                term *= (x - x_values[j]) / (x_values[i] - x_values[j]);
+            }
+        }
+        result += term;
+    }
+    return result;
+}
+
+int main() {
+    int n;
+    printf("Nhap so luong diem: ");
+    scanf("%d", &n);
+
+    float x_values[n], y_values[n];
+    printf("Nhap cac diem (x, y):\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%f%f", &x_values[i], &y_values[i]);
+    }
+
+    float x;
+    printf("Nhap gia tri x can tinh: ");
+    scanf("%f", &x);
+
+    float result = lagrange(x, x_values, y_values, n);
+    printf("Gia tri cua da thuc tai diem %.2f la: %.2f\n", x, result);
+
+    return 0;
+}
