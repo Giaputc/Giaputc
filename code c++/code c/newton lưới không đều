@@ -2,24 +2,25 @@
 
 void nhap_x_y(int n, float x[], float y[]) {
     for (int i = 0; i <= n; i++) {
-        printf("Nhập x[%d] và y[%d]: ", i, i);
+        printf("Nh?p x[%d] và y[%d]: ", i, i);
         scanf("%f %f", &x[i], &y[i]);
     }
 }
-
 void tinh_hieu_tien(int n, float D[], float x[], float y[]) {
     for (int i = 0; i < n; i++) {
         D[i] = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
     }
 }
-
 float noi_suy_newton(int n, float D[], float x[], float y[], float x0) {
-    float p = y[0];
-    float tmp = 1.0;
+    float p = y[0] + D[0] * (x0 - x[0]);
+    float tmp = (x0 - x[0]);
 
-    for (int i = 1; i <= n; i++) {
+    for (int i = 2; i <= n; i++) {
+        for (int j = 0; j <= n - i ; j++) {
+            D[j] = (D[j + 1] - D[j]) / (x[j + i] - x[j]);
+        }
         tmp *= (x0 - x[i - 1]);
-        p += D[i - 1] * tmp;
+        p += D[0] * tmp;
     }
     return p;
 }
@@ -27,22 +28,15 @@ float noi_suy_newton(int n, float D[], float x[], float y[], float x0) {
 int main() {
     int n;
     float x[200], y[200], D[100], x0;
-    
-    printf("Nhập n và x0: ");
+    printf("Nh?p n và x: ");
     scanf("%d %f", &n, &x0);
-    
-    printf("Nhập các giá trị x và y tương ứng:\n");
+    printf("Nh?p các giá tr? x và y tuong ?ng:\n");
     nhap_x_y(n, x, y);
-    
     tinh_hieu_tien(n, D, x, y);
-    
     float ket_qua = noi_suy_newton(n, D, x, y, x0);
-    
-    printf("Giá trị nội suy tại x0 = %f là: %f\n", x0, ket_qua);
-    
+    printf("Giá tr? n?i suy t?i x0 = %f là: %f\n", x, ket_qua);
     return 0;
 }
-
 Nhập n vα x0: 3
 1
 Nhập cßc giá trị x vα y :
