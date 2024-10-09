@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+class BT {
+	public:
+	BT *left,*right;
+	int value;	
+	BT(int val){
+		value=val;
+		left=right=NULL;
+	}
+	void insert(int val){
+		if(val<value){
+			if(left==NULL){
+				left=new  BT(val);
+			}else{
+				left->insert(val);
+			}
+		}else if(val>value){
+			if(right==NULL){
+				right=new BT(val);
+			}else{
+				right->insert(val);
+			}
+		}
+	}
+	void  traverse(int depth){
+		if(left !=NULL){
+			left->traverse(depth+1);
+		}
+		cout<<value<<" "<<depth<<endl;
+		if(right!=NULL){
+			right->traverse(depth+1);
+		}
+	}
+};
+int main(){
+	int n;cin>>n;
+	int x;cin>>x;
+	BT root(x);
+		for(int i=0;i<n-1;i++){
+			cin>>x;
+		root.insert(x);
+		}
+		root.traverse(0);
+	
+}
+10
+34 66 17 50 71 17 94 25 50 68
+17 1
+25 2
+34 0
+50 2
+66 1
+68 3
+71 2
+94 3
